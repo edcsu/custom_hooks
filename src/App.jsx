@@ -16,7 +16,10 @@ function App() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const { isFetching, fetchedData: userPlaces, error} = useFetch(fetchUserPlaces, [])
+  const { isFetching, 
+    fetchedData: userPlaces, 
+    setFetchedData: setUserPlaces, 
+    error}  = useFetch(fetchUserPlaces, [])
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
