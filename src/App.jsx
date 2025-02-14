@@ -11,14 +11,12 @@ import {useFetch} from './hooks/useFetch.js'
 
 function App() {
   const selectedPlace = useRef();
-
-  const [userPlaces, setUserPlaces] = useState([]);
   
   const [errorUpdatingPlaces, setErrorUpdatingPlaces] = useState();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const { isFetching, fetchedData, error} = useFetch(fetchUserPlaces, [])
+  const { isFetching, fetchedData: userPlaces, error} = useFetch(fetchUserPlaces, [])
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true);
@@ -115,7 +113,7 @@ function App() {
             fallbackText="Select the places you would like to visit below."
             isLoading={isFetching}
             loadingText="Fetching your places..."
-            places={fetchedData}
+            places={userPlaces}
             onSelectPlace={handleStartRemovePlace}
           />
         )}
