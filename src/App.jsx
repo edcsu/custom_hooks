@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 import Places from './components/Places.jsx';
 import Modal from './components/Modal.jsx';
@@ -61,20 +61,20 @@ function App() {
         )
       );
 
-      // try {
-      //   await updateUserPlaces(
-      //     userPlaces.filter((place) => place.id !== selectedPlace.current.id)
-      //   );
-      // } catch (error) {
-      //   setUserPlaces(userPlaces);
-      //   setErrorUpdatingPlaces({
-      //     message: error.message || 'Failed to delete place.',
-      //   });
-      // }
+      try {
+        await updateUserPlaces(
+          userPlaces.filter((place) => place.id !== selectedPlace.current.id)
+        );
+      } catch (error) {
+        setUserPlaces(userPlaces);
+        setErrorUpdatingPlaces({
+          message: error.message || 'Failed to delete place.',
+        });
+      }
 
       setModalIsOpen(false);
     },
-    [userPlaces]
+    [userPlaces, setUserPlaces]
   );
 
   function handleError() {
